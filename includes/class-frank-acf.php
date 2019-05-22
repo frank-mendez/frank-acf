@@ -79,6 +79,8 @@ class Frank_Acf {
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
 
+		$this->define_custom_post_types();
+
 	}
 
 	/**
@@ -121,6 +123,11 @@ class Frank_Acf {
 		 * side of the site.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-frank-acf-public.php';
+
+		/**
+		 * The class responsible for defining all custom post type.
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-frank-acf-custom-post-type.php';
 
 		$this->loader = new Frank_Acf_Loader();
 
@@ -172,6 +179,19 @@ class Frank_Acf {
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
+
+	}
+
+	/**
+	 * Register all of the hooks related to custom post type
+	 */
+	private function define_custom_post_types() {
+
+		$cpt = new Frank_Acf_Custom_Post_Type( $this->get_plugin_name(), $this->get_version() );
+
+		$this->loader->add_action( 'init', $cpt, 'company_post_type' );
+		$this->loader->add_action( 'init', $cpt, 'company_taxonomy', 0 );
+		$this->loader->add_filter( 'post_type_link', $cpt, 'acrticles_permalink_structure', 10, 4 );
 
 	}
 

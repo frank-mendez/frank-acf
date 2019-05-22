@@ -15,7 +15,7 @@
  * @wordpress-plugin
  * Plugin Name:       Frank ACF
  * Plugin URI:        https://github.com/frank-mendez/frank-acf
- * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
+ * Description:       Plugin for Advance Custom Fields. Testing Purposes only
  * Version:           1.0.0
  * Author:            Frank Mendez
  * Author URI:        https://frank-mendez.github.io/
