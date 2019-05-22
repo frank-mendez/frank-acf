@@ -8,11 +8,11 @@ Stable tag: 4.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Here is a short description of the plugin.  This should be no more than 150 characters.  No markup here.
+Plugin for Advance Custom Fields. Testing Purposes only
 
 == Description ==
 
-This is the long description.  No limit, and you can use Markdown (as well as in the following sections).
+Advanced Custom Fields is a WordPress plugin which allows you to add extra content fields to your WordPress edit screens. These extra content fields are more commonly referred to as Custom Fields and can allow you to build website’s faster and educate your client’s quicker.
 
 For backwards compatibility, if this section is missing, the full length of the short description will be used, and
 Markdown parsed.
