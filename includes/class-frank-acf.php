@@ -191,7 +191,7 @@ class Frank_Acf {
 
 		$this->loader->add_action( 'init', $cpt, 'company_post_type' );
 		$this->loader->add_action( 'init', $cpt, 'company_taxonomy', 0 );
-		$this->loader->add_filter( 'post_type_link', $cpt, 'acrticles_permalink_structure', 10, 4 );
+		$this->loader->add_filter( 'post_type_link', $cpt, 'company_post_link', 1, 3 );
 
 	}
 

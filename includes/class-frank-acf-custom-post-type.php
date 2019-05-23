@@ -70,15 +70,15 @@ class Frank_Acf_Custom_Post_Type {
 	 
 	    $args = array(
 	        'labels'             => $labels,
-            'taxonomies'           => array ('category'),
+            'taxonomies'         => array('company_category'),
             'public'             => true,
             'publicly_queryable' => true,
             'show_ui'            => true,
             'show_in_menu'       => true,
             'menu_position'      => 5,
             'menu_icon'          => 'dashicons-building',
-            'query_var'          => true,
             'rewrite'            => array( 'slug' => 'company/%company_category%', 'with_front' => false ),
+            'query_var'          => true,
             'capability_type'    => 'post',
             'has_archive'        => true,
             'hierarchical'       => false,
@@ -86,6 +86,7 @@ class Frank_Acf_Custom_Post_Type {
 	    );
 	 
 	    register_post_type( 'company', $args );
+	    flush_rewrite_rules();
 	}
 
 	public function company_taxonomy() {
@@ -110,21 +111,22 @@ class Frank_Acf_Custom_Post_Type {
 			 'show_ui' => true,
 			 'show_admin_column' => true,
 			 'query_var' => true,
-			 'rewrite' => array( 'slug' => 'articles', 'with_front' => false ),
+			 'rewrite' => array( 'slug' => 'company', 'with_front' => false ),
 		);
 
 		register_taxonomy( 'company_category', array( 'company_category' ), $args ); 
 	}
 
-	public function acrticles_permalink_structure($post_link, $post, $leavename, $sample) {
-
-		if ( false !== strpos( $post_link, '%company_category%' ) ) {
-			$event_type_term = get_the_terms( $post->ID, 'company_category' );
-			if($event_type_term)
-			$post_link = str_replace( '%company_category%', array_pop( $event_type_term )->slug, $post_link );
-		}
-		return $post_link;
-	} 
+	public function company_post_link( $post_link, $id = 0 ){
+	    $post = get_post($id);  
+	    if ( is_object( $post ) ){
+	        $terms = wp_get_object_terms( $post->ID, 'company_category' );
+	        if( $terms ){
+	            return str_replace( '%company_category%' , $terms[0]->slug , $post_link );
+	        }
+	    }
+	    return $post_link;  
+	}
 
 }
 
